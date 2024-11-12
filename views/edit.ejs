@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Expense</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html, body {
+            width: 100%;
+            height: 100%;
+            background-color: #111827;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: #f3f4f6;
+        }
+
+        .navbar {
+            background-color: #1f2937;
+            padding: 15px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 50px auto;
+            background-color: #1f2937;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+            color: #e5e7eb;
+            font-size: 2rem;
+            font-weight: 600;
+        }
+
+        .expense-card {
+            display: flex;
+            justify-content: space-between;
+            background-color: #2d3748;
+            margin-bottom: 20px;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            position: relative;
+        }
+
+        .expense-details {
+            max-width: 70%;
+        }
+
+        .expense-details h2 {
+            color: #e5e7eb;
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+        }
+
+        .amount {
+            color: #10B981; /* Green for positive values */
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .description {
+            color: #d1d5db;
+            font-size: 1rem;
+            margin-bottom: 8px;
+        }
+
+        .payment-method {
+            color: #9ca3af;
+            font-size: 0.9rem;
+        }
+
+        .expense-date {
+            text-align: right;
+            color: #9ca3af;
+            font-size: 1rem;
+        }
+
+        .expense-actions {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+        }
+
+        .edit-btn, .delete-btn {
+            color: #60a5fa; /* Blue for edit button */
+            font-size: 0.9rem;
+            margin-left: 15px;
+            text-decoration: none;
+        }
+
+        .edit-btn:hover, .delete-btn:hover {
+            color: #3b82f6; /* Darker blue on hover */
+        }
+
+        .delete-btn {
+            color: #ef4444; /* Red for delete button */
+        }
+
+        .delete-btn:hover {
+            color: #dc2626; /* Darker red on hover */
+        }
+
+        .expense-card:hover {
+            background-color: #374151;
+            box-shadow: 0 4px 25px rgba(0, 0, 0, 0.3);
+            transition: background-color 0.3s, box-shadow 0.3s;
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                padding: 20px;
+            }
+
+            h1 {
+                font-size: 1.6rem;
+            }
+
+            .expense-card {
+                flex-direction: column;
+                padding: 15px;
+            }
+
+            .expense-details h2 {
+                font-size: 1.3rem;
+            }
+
+            .amount {
+                font-size: 1.1rem;
+            }
+
+            .description, .payment-method, .expense-date {
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Edit Expense</h1>
+        <form action="/expenses/<%= expense._id %>?_method=PUT" method="POST">
+            <label for="date">Date:</label>
+            <input type="date" id="date" name="date" value="<%= expense.date.toISOString().slice(0, 10) %>" required>
+
+            <label for="name">Expense Name:</label>
+            <input type="text" id="name" name="name" value="<%= expense.name %>" required>
+
+            <label for="amount">Amount:</label>
+            <input type="number" id="amount" name="amount" value="<%= expense.amount %>" required>
+
+            <label for="description">Description:</label>
+            <textarea id="description" name="description"><%= expense.description %></textarea>
+
+            <label for="paymentMethod">Payment Method:</label>
+            <select id="paymentMethod" name="paymentMethod" required>
+                <option value="cash" <%= expense.paymentMethod === 'cash' ? 'selected' : '' %>>Cash</option>
+                <option value="Gpay" <%= expense.paymentMethod === 'Gpay' ? 'selected' : '' %>>Gpay</option>
+                <option value="Credit" <%= expense.paymentMethod === 'Credit' ? 'selected' : '' %>>Credit</option>
+            </select>
+
+            <button type="submit">Update Expense</button>
+        </form>
+    </div>
+</body>
+</html>

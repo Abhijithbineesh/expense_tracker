@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/stylesheets/style.css">
+    
+</head>
+<body>
+    <nav class="navbar">
+        <a href="/expenses" class="nav-link back-btn">Go to Expenses</a>
+                
+            </nav>
+    <div class="container">
+        <h1>Expense Tracker</h1>
+        <form action="/create" method="POST">
+            <div class="form-group">
+                <label for="date">Date</label>
+                <input type="date" id="date" name="date" required>
+            </div>
+            <div class="form-group">
+                <label for="expense-name">Expense Name</label>
+                <input type="text" id="expense-name" name="name" required>
+            </div>
+            <div class="form-group">
+                <label for="amount">Amount</label>
+                <input type="number" id="amount" name="amount" required>
+            </div>
+            <div class="form-group">
+                <label for="description">Description</label>
+                <textarea id="description" name="description"></textarea>
+            </div>
+            <div class="form-group">
+                <label for="payment-method">Payment Method</label>
+                <select id="payment-method" name="paymentMethod" required>
+                    <option value="cash">Cash</option>
+                    <option value="gpay">Gpay</option>
+                    <option value="credit">Credit</option>
+                </select>
+            </div>
+            <button type="submit" class="submit-btn"> + Add Expense</button>
+        </form>
+    </div>
+    
+</body>
+</html>
